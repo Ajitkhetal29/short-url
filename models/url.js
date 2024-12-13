@@ -11,7 +11,7 @@ const urlSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    visithostory: [{ timestamp: { type: Number } }],
+    visitHistory: [{ timestamp: { type: Number } }],
   },
   { timestamp: true }
 );
