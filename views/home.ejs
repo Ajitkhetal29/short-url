@@ -4,11 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+           body {
+            color: white;
+            background-color: black;
+        }
+    </style>
   </head>
   <body>
-    <h1>URLS</h1>
-    <% urls.forEach(url => { %>
-    <li><%= url.shortId %></li>
-    <% }) %>
+    <h1>URL Shortner</h1>
+    <div>
+      <form action="/url" method="POST">
+        <label>Enter Your Orignal URL</label>
+        <input type="text" name="url" placeholder="Enter Your URL" />
+        <button type="submit">Genrate</button>
+      </form>
+    </div>
+    <% if (locals.id) { %>
+    <p>
+      <a
+        href="http://localhost:8001/url/<%= id %>"
+        class="btn btn-primary"
+        role="button"
+        >Visit</a
+      >
+    </p>
+    <% } %>
+
+    <% if (locals.urls) { %>
+      <div>
+        <table>
+          <thead>
+            <th>S.No</th>
+            <th>ShortID</th>
+            <th>Redirect</th>
+            <th>Clicks</th>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortId %></td>
+              <td><%= url.redirectURL %></td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
   </body>
 </html>
